@@ -61,8 +61,8 @@ for example in example_oracles.deutsch_examples:
     job = qiskit.execute(program, qiskit.BasicAer.get_backend('qasm_simulator'))
     result = job.result()
     print(result.get_counts())
-    program.draw(output='mpl', filename=example.__name__)
-    plot_histogram(result.get_counts(), filename=example.__name__+'_histogram')
+    program.draw(output='mpl', filename='Deutsch_Imgs/'+example.__name__)
+    plot_histogram(result.get_counts(), filename='Deutsch_Imgs/'+example.__name__+'_histogram')
 
 print("Running Deutsch_Jozsa Examples")
 for example in example_oracles.deutsch_jozsa_examples:
@@ -71,7 +71,7 @@ for example in example_oracles.deutsch_jozsa_examples:
     job = qiskit.execute(program, qiskit.BasicAer.get_backend('qasm_simulator'))
     result = job.result()
     print(result.get_counts())
-    program.draw(output='mpl', filename=example.__name__)
-    plot_histogram(result.get_counts(), filename=example.__name__+'_histogram')
+    program.draw(output='mpl', filename='Deutsch_Jozsa_Imgs/'+example.__name__)
+    plot_histogram(result.get_counts(), filename='Deutsch_Jozsa_Imgs/'+example.__name__+'_histogram')
 
 
