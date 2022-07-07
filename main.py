@@ -1,8 +1,12 @@
 import qiskit
 import matplotlib.pyplot as plt
+from qiskit.visualization import plot_histogram
 
 # Deutsch algorithm for a single qubit
 # Takes in an Oracle (QuantumCircuit) with 2 qubits
+import example_oracles
+
+
 def deutsch(oracle):
     program = qiskit.QuantumCircuit(2, 1)  # 2 qubits, 1 bit
 
@@ -50,34 +54,24 @@ def deutsch_jozsa(oracle, n):
     return program
 
 
-# Defining an Oracle
-oracle = qiskit.QuantumCircuit(2)       # 2 qubits, 0 bits
-oracle.cnot(0,1)
+print("Running Deutsch Examples")
+for example in example_oracles.deutsch_examples:
+    oracle = example()
+    program = deutsch(oracle)
+    job = qiskit.execute(program, qiskit.BasicAer.get_backend('qasm_simulator'))
+    result = job.result()
+    print(result.get_counts())
+    program.draw(output='mpl', filename=example.__name__)
+    plot_histogram(result.get_counts(), filename=example.__name__+'_histogram')
 
-# Adding the oracle to the deutsch algorithm
-program = deutsch(oracle)
-
-# Visualizing the circuit
-program.draw(output='mpl', filename='deutsch.pdf')
-plt.show()
-
-# Running the circuit, getting the results
-job = qiskit.execute( program, qiskit.BasicAer.get_backend('qasm_simulator'))
-print( job.result().get_counts() )
-
-oracle2 = qiskit.QuantumCircuit(4)
-oracle2.h(0)
-oracle2.cnot(1,0)
-oracle2.z(2)
-oracle2.h(0)
-
-program2= deutsch_jozsa(oracle2, 3)
-
-program2.draw(output='mpl', filename='deutsch_jozsa.pdf')
-plt.show()
-
-job2 = qiskit.execute( program2, qiskit.BasicAer.get_backend('qasm_simulator'))
-print( job2.result().get_counts() )
-
+print("Running Deutsch_Jozsa Examples")
+for example in example_oracles.deutsch_jozsa_examples:
+    oracle, n = example()
+    program = deutsch_jozsa(oracle, n)
+    job = qiskit.execute(program, qiskit.BasicAer.get_backend('qasm_simulator'))
+    result = job.result()
+    print(result.get_counts())
+    program.draw(output='mpl', filename=example.__name__)
+    plot_histogram(result.get_counts(), filename=example.__name__+'_histogram')
 
 
