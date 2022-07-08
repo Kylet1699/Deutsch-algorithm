@@ -17,6 +17,12 @@ def example_three():
 
 def example_four():
     oracle = qiskit.QuantumCircuit(2)
+    oracle.reset(0)
+    oracle.x(0)
+    return oracle
+
+def example_five():
+    oracle = qiskit.QuantumCircuit(2)
     oracle.x(0)
     return oracle
 
@@ -29,7 +35,7 @@ def jozsa_example_one():
     return oracle, 3
 
 # these return an oracle using 2 qubits
-deutsch_examples = [example_one, example_two, example_three, example_four]
+deutsch_examples = [example_one, example_two, example_three, example_four, example_five]
 
 # these return an oracle using n qubits, as well as the integer n
 deutsch_jozsa_examples = [jozsa_example_one]
