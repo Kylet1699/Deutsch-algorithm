@@ -80,7 +80,7 @@ def run_on_IBM(circuit, n):
     results = job.result()
     answer = results.get_counts()
 
-    plot_histogram(answer, filename='IBM_Imgs/histogram')
+    plot_histogram(answer, filename='IBM_Imgs/histogram2')
 
 print("Running Deutsch Examples")
 for example in example_oracles.deutsch_examples:
@@ -105,7 +105,7 @@ for example in example_oracles.deutsch_jozsa_examples:
 
 print("Running it on IBM")
 # Try it on real Q-computer:
-oracle, n = example_oracles.jozsa_example_one()
-circuit = deutsch_jozsa(oracle, n)
-circuit.draw(output="mpl", filename='IBM_Imgs/oracle1')
+oracle = example_oracles.example_two()
+circuit = deutsch(oracle)
+circuit.draw(output="mpl", filename='IBM_Imgs/oracle2')
 run_on_IBM(circuit, n)
