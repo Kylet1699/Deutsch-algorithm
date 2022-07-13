@@ -74,14 +74,14 @@ def run_on_IBM(circuit, n):
     print("least busy backend: ", backend)
 
     transpiled_dj_circuit = transpile(circuit, backend, optimization_level=3)
-    transpiled_dj_circuit.draw(output="mpl", filename='IBM_Imgs/transpiledCircuit')
+    transpiled_dj_circuit.draw(output="mpl", filename='IBM_Imgs/transpiledCircuit3')
     job = backend.run(transpiled_dj_circuit)
     job_monitor(job, interval=2)
 
     results = job.result()
     answer = results.get_counts()
 
-    plot_histogram(answer, filename='IBM_Imgs/histogram2')
+    plot_histogram(answer, filename='IBM_Imgs/histogram3')
 
 print("Running Deutsch Examples")
 for example in example_oracles.deutsch_examples:
@@ -104,9 +104,10 @@ for example in example_oracles.deutsch_jozsa_examples:
     plot_histogram(result.get_counts(), filename='Deutsch_Jozsa_Imgs/'+example.__name__+'_histogram')
 
 
-print("Running it on IBM")
+# print("Running it on IBM")
 # Try it on real Q-computer:
-oracle = example_oracles.example_two()
+oracle = example_oracles.example_three()
 circuit = deutsch(oracle)
-circuit.draw(output="mpl", filename='IBM_Imgs/oracle2')
-run_on_IBM(circuit, n)
+circuit.draw(output="mpl", filename='IBM_Imgs/oracle3')
+
+# run_on_IBM(circuit, n)
