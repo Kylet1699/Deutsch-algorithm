@@ -74,6 +74,7 @@ def run_on_IBM(circuit, n):
     print("least busy backend: ", backend)
 
     transpiled_dj_circuit = transpile(circuit, backend, optimization_level=3)
+    transpiled_dj_circuit.draw(output="mpl", filename='IBM_Imgs/transpiledCircuit')
     job = backend.run(transpiled_dj_circuit)
     job_monitor(job, interval=2)
 
