@@ -12,6 +12,17 @@ from qiskit import assemble, transpile
 # Takes in an Oracle (QuantumCircuit) with 2 qubits
 import example_oracles
 
+# make sure directories exist
+import os
+if not os.path.exists("Deutsch_Imgs"):
+    os.mkdir("Deutsch_Imgs")
+if not os.path.exists("Deutsch_Jozsa_Imgs"):
+    os.mkdir("Deutsch_Jozsa_Imgs")
+if not os.path.exists("IBM_Imgs"):
+    os.mkdir("IBM_Imgs")
+
+
+
 # Deutsch's algorithm as defined in the lecture slides, Weeks 5-6
 # Takes in an oracle quantum circuit and outputs a Deutsch's Algorithm circuit
 def deutsch(oracle):
